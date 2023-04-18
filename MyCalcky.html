@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcky!!</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+</head>
+<style>
+    body,
+    html {
+        margin: 0;
+        padding: 5px;
+        overflow-x: hidden;
+        background-color: rgb(45, 46, 46);
+    }
+
+    a{
+        text-decoration: none;
+        color:orangered;
+        font-size: 45px;
+        margin-left: 10px;
+        box-shadow: 0px 0px 5px 0px orangered;
+        padding: 0px 10px;
+        display: none;
+
+
+    }
+
+    #zero {
+        width: 115px;
+    }
+
+    .display input {
+        font-size: 30px;
+        text-align: right;
+        height: 50px;
+        border: none;
+        box-shadow: 0px 0px 5px 0px grey;
+        width: 275px;
+        padding: 5px;
+        color: white;
+        border-radius: 20px;
+        background: transparent;
+    }
+
+    .btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+        padding: 9px 5px;
+        font-size: 20px;
+
+    }
+
+    .con {
+        box-shadow: 0px 0px 5px 0px grey;
+        border-radius: 15px;
+        width: fit-content;
+        background-color: black;
+        display: grid;
+        grid-template-columns: auto auto auto;
+
+    }
+
+    /*  */
+    #log {
+        font-size: 18px;
+    }
+
+    #scientific {
+        margin-top: 120px;
+    }
+
+
+    #oprator {
+        background-color: orangered;
+    }
+
+    #ul {
+        border: 2px solid;
+        width: 100px;
+        color: orangered;
+
+    }
+
+    h1 {
+        color: orangered;
+    }
+
+
+
+    @media screen and (max-width:768px) {
+
+        .con {
+            display: grid;
+            grid-template-columns: auto;
+        }
+
+        #scientific {
+            margin-top: -15px;
+            /* display: none; */
+
+        }
+        a{
+            display: block;
+            width: fit-content;
+        }
+    }
+</style>
+
+<body>
+    <h1 class="col text-center display-1"><b>Calcky</b></h1>
+    <div class="col m-auto width" id="ul"></div>
+    <div class="container con mt-4 p-3">
+        <div class="container  p-1">
+            <!-- <a id="show"href="#scientific">C</a> -->
+            <div class="col text-center mb-5 mt-3 display">
+                <input type="text" id="display" placeholder="0">
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <div class="btn btn-dark mx-2" onclick="Clear()">AC</div>
+                    <div class="btn btn-dark mx-2" onclick="del()">Del</div>
+                    <div class="btn btn-dark mx-2" onclick="display('.')">.</div>
+                    <div class="btn btn-dark mx-2" id="oprator" onclick="display('/')">/</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-center mb-4 ">
+                    <div class="btn btn-dark mx-2" onclick="display('7')">7</div>
+                    <div class="btn btn-dark mx-2" onclick="display('8')">8</div>
+                    <div class="btn btn-dark mx-2" onclick="display('9')">9</div>
+                    <div class="btn btn-dark mx-2" id="oprator" onclick="display('*')">*</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-center mb-4">
+                    <div class="btn btn-dark mx-2" onclick="display('4')">4</div>
+                    <div class="btn btn-dark mx-2" onclick="display('5')">5</div>
+                    <div class="btn btn-dark mx-2" onclick="display('6')">6</div>
+                    <div class="btn btn-dark mx-2" id="oprator" onclick="display('-')">-</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-center mb-4">
+                    <div class="btn btn-dark mx-2" onclick="display('1')">1</div>
+                    <div class="btn btn-dark mx-2" onclick="display('2')">2</div>
+                    <div class="btn btn-dark mx-2" onclick="display('3')">3</div>
+                    <div class="btn btn-dark mx-2" id="oprator" onclick="display('+')">+</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col text-center mb-5">
+                    <div class="btn btn-dark mx-2" onclick="display('00')" id="zero">0 0</div>
+                    <div class="btn btn-dark mx-2" onclick="display('0')">0</div>
+                    <div class="btn btn-dark mx-2" id="oprator" onclick="Calc()">=</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- scientific -->
+        <div class="container p-1 ">
+            <div id="scientific">
+
+                <div class="row">
+                    <div class="col text-center mb-4">
+                        <div class="btn btn-dark mx-2" id="zero" onclick="display('(')">(</div>
+                        <div class="btn btn-dark mx-2" id="zero" onclick="display(')')">)</div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center mb-4">
+                        <div class="btn btn-dark mx-2" onclick="sin('sin')">sin</div>
+                        <div class="btn btn-dark mx-2" onclick="cos('cos')">cos</div>
+                        <div class="btn btn-dark mx-2" onclick="tan('tan')">tan</div>
+                        <div class="btn btn-dark mx-2" id="log" onclick="log('log10')">log<sub>10</sub></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center mb-4">
+                        <div class="btn btn-dark mx-2" onclick="byOne('1/x')">1/X</div>
+                        <div class="btn btn-dark mx-2" onclick="sqr('x2')">X<sup>2</sup></div>
+                        <div class="btn btn-dark mx-2" onclick="cube('X3')">X<sup>3</sup></div>
+                        <div class="btn btn-dark mx-2" onclick="e('e')">e</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center mb-4">
+                        <div class="btn btn-dark mx-2" onclick="fact('X!')">X!</div>
+                        <div class="btn btn-dark mx-2" onclick="pi('pi')">&#8719</div>
+                        <div class="btn btn-dark mx-2" onclick="sqrtt('sqroot')">&#8730</div>
+                        <div class="btn btn-dark mx-2" onclick="display('%')">%</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center mb-4">
+                        <div class="btn btn-dark mx-2" onclick="tax1()">2.5%</div>
+                        <div class="btn btn-dark mx-2" onclick="tax2()">5%</div>
+                        <div class="btn btn-dark mx-2" onclick="tax3()">9%</div>
+                        <div class="btn btn-dark mx-2" onclick="tax4()">18%</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <script>
+        var dis = document.getElementById('display')
+
+        display = (n) => {
+            dis.value += n;
+        }
+
+        Calc = () => {
+            try {
+                dis.value = eval(dis.value)
+            }
+            catch (err) {
+                alert('Invalid Input')
+            }
+        }
+
+        Clear = () => {
+            dis.value = "";
+        }
+
+        del = () => {
+            dis.value = dis.value.slice(0, -1);
+        }
+
+        // scientific
+
+        sin = () => {
+            dis.value = Math.sin(dis.value)
+        }
+
+        cos = () => {
+            dis.value = Math.cos(dis.value);
+        }
+        tan = () => {
+            dis.value = Math.tan(dis.value);
+
+        }
+        log = () => {
+            dis.value = Math.log10(dis.value)
+        }
+
+
+        byOne = () => {
+            dis.value = 1 / dis.value;
+
+        }
+
+        sqr = () => {
+            dis.value = dis.value ** 2;
+        }
+
+        cube = () => {
+            dis.value = dis.value ** 3;
+        }
+
+        e = () => {
+            dis.value = dis.value * 2.71828182;
+        }
+
+
+        fact = () => {
+            var i, f = 1, num = dis.value;
+            for (i = 1; i <= num; i++) {
+                f = f * i;
+            }
+            // i=i-1;
+            dis.value = f;
+        }
+
+        pi = () => {
+            dis.value = dis.value * 3.1415926;
+        }
+
+        sqrtt = () => {
+            dis.value = Math.sqrt(dis.value)
+        }
+
+        //tax
+
+        tax1 = () => {
+            dis.value = (dis.value * 2.5) / 100;
+        }
+        tax2 = () => {
+            dis.value = (dis.value * 5) / 100;
+        }
+        tax3 = () => {
+            dis.value = (dis.value * 9) / 100;
+        }
+        tax4 = () => {
+            dis.value = (dis.value * 18) / 100;
+        }
+
+        //show
+
+        // var showbtn = document.getElementById('show');
+        // var scien = documwnt.getElementById('scientific');
+
+        //     showbtn.addEventListener('click',function(){
+        //         scien.style.display = "block";
+        //     });
+
+    </script>
+</body>
+
+</html>
